@@ -7,13 +7,26 @@ function adicionar(){
     let nomeProduto = produto.split('-')[0];
     let precoUnitario = produto.split('R$')[1];
     let quantidade = document.getElementById('quantidade').value;
+
+    if (!produto) {
+        alert("Por favor, selecione um produto.");
+        return;
+    }
+
+    if (isNaN(quantidade) || quantidade <= 0) {
+        alert("Por favor, insira uma quantidade válida.");
+        return;
+    }
+
     //calcular o preço, subtotal
     let preco = quantidade * precoUnitario;
+
     //adicionar no carrinho
     let carrinho = document.getElementById('lista-produtos');
     carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
           <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R$${preco}</span>
           </section>`;
+          
     //atualizar o valor total
     totalGeral = totalGeral + preco;
     let campoTotal = document.getElementById('valor-total');
